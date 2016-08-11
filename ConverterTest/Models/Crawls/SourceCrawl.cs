@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using System.Collections.Generic;
 
 namespace ConverterTest.Models.Crawls
 {

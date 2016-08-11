@@ -106,9 +106,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\ConnectionToDB.cs" />
+    <Compile Include="DAL\ConnectionToDB.cs" />
     <Compile Include="Models\Crawls\Crawl.cs" />
-    <Compile Include="Models\Crawls\ConvertIPS.cs" />
+    <Compile Include="Models\Crawls\ConvertIP.cs" />
     <Compile Include="Models\Visitors\ConvertVisit.cs" />
     <Compile Include="Models\Visitors\ConvertVisitor.cs" />
     <Compile Include="Models\Visitors\ConvertVisitPage.cs" />
@@ -124,6 +124,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

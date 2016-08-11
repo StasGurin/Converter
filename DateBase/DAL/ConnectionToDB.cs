@@ -1,8 +1,8 @@
-﻿using MongoDB.Driver;
-using DataBase.Models.Crawls;
+﻿using DataBase.Models.Crawls;
 using DataBase.Models.Visitors;
+using MongoDB.Driver;
 
-namespace DataBase.BLL
+namespace DataBase.DAL
 {
     public class ConnectionToDB
     {
@@ -17,9 +17,7 @@ namespace DataBase.BLL
         }
         public IMongoDatabase Connection()
         {
-            var client = new MongoClient();
-            IMongoDatabase database = client.GetDatabase("populator");
-            return database;
+            return new MongoClient().GetDatabase("populator");
         }
     }
 }

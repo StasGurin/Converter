@@ -2,7 +2,7 @@
 
 namespace ConverterTest.Models.Crawls
 {
-    public class SourceIPS
+    public class SourceIP
     {
         public ObjectId Id { get; set; }
         public int UniqueID { get; set; }
