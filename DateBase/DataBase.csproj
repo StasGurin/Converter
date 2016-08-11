@@ -107,15 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\ConnectionToDB.cs" />
-    <Compile Include="Models\Crawls\ConvertCrawl.cs" />
-    <Compile Include="Models\Crawls\ConvertDomainMask.cs" />
+    <Compile Include="Models\Crawls\Crawl.cs" />
     <Compile Include="Models\Crawls\ConvertIPS.cs" />
-    <Compile Include="Models\Crawls\SourceCrawl.cs" />
-    <Compile Include="Models\Crawls\SourceDomainMask.cs" />
-    <Compile Include="Models\Crawls\SourceIPS.cs" />
-    <Compile Include="Models\Visitors\Visit.cs" />
-    <Compile Include="Models\Visitors\Visitor.cs" />
-    <Compile Include="Models\Visitors\VisitPage.cs" />
+    <Compile Include="Models\Visitors\ConvertVisit.cs" />
+    <Compile Include="Models\Visitors\ConvertVisitor.cs" />
+    <Compile Include="Models\Visitors\ConvertVisitPage.cs" />
+    <Compile Include="Models\Visitors\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

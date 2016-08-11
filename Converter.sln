@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DateBase\DataBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConverterTest", "ConverterTest\ConverterTest.csproj", "{9888A11C-1602-4A4A-AD18-E4DD6A289AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter", "Converter\Converter.csproj", "{1AAAF511-8928-4E5B-9928-A384464EAF98}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{9888A11C-1602-4A4A-AD18-E4DD6A289AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9888A11C-1602-4A4A-AD18-E4DD6A289AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9888A11C-1602-4A4A-AD18-E4DD6A289AB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1AAAF511-8928-4E5B-9928-A384464EAF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AAAF511-8928-4E5B-9928-A384464EAF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AAAF511-8928-4E5B-9928-A384464EAF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AAAF511-8928-4E5B-9928-A384464EAF98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

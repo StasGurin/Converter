@@ -63,7 +63,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CollectionConnect.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="Models\Crawls\SourceCrawl.cs" />
+    <Compile Include="Models\Crawls\SourceDomainMask.cs" />
+    <Compile Include="Models\Crawls\SourceIPS.cs" />
+    <Compile Include="Models\Visitors\SourceVisit.cs" />
+    <Compile Include="Models\Visitors\SourceVisitor.cs" />
+    <Compile Include="Models\Visitors\SourceVisitPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
