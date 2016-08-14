@@ -2,12 +2,12 @@
 
 namespace ConverterTest.Models.Crawls
 {
-    public class SourceCrawl
+    public class SourceIP
     {
         public ObjectId Id { get; set; }
         public int UniqueID { get; set; }
-        public string Name { get; set; }
-        public string IPListUrl { get; set; }
+        public int OwnerID { get; set; }
+        public string IPType { get; set; }
+        public string IPAddress { get; set; }
     }
-
 }

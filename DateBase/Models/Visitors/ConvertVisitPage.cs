@@ -8,7 +8,6 @@ namespace DataBase.Models.Visitors
 {
     public class ConvertVisitPage
     {
-        public ObjectId Id { get; set; }
         public string Hash { get; set; }
         public string Url { get; set; }
     }
