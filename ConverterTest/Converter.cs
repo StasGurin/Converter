@@ -17,7 +17,7 @@ namespace ConverterTest
     {
         ConnectionToDB dataBase = new ConnectionToDB();
         CollectionConnect sourceCollectionCon = new CollectionConnect();
-       
+
         [TestMethod]
         public async Task ConvertCrawls()
         {
@@ -53,8 +53,8 @@ namespace ConverterTest
                         var resultMasks = await sourceCollectionCon.CollectionMasks.Find(filterMasks).ToListAsync();
                         foreach (var docMask in resultMasks)
                         {
-                            convertCrawl.DomainMasks.Add(docMask.Name);
-                        }
+                             convertCrawl.DomainMasks.Add(docMask.Name);
+                            }
                         #endregion
 
                         #region ips->crawls
@@ -113,7 +113,7 @@ namespace ConverterTest
                             Visits = new List<ConvertVisit>(),
                             UserInfo = new UserInfo()
                         };
-                        
+
                         var filterCrawl = builderCrawl.Eq(x => x.UniqueID, docVisitor.CrawlID);
                         var resultCrawl = await sourceCollectionCon.CollectionCrawls.Find(filterCrawl).ToListAsync();
 
@@ -155,21 +155,21 @@ namespace ConverterTest
                             foreach (var docVisitPages in resultVisitPages)
                             {
                                 var convertVisitPages = new ConvertVisitPage
-                                {
+                        {
                                     Hash = docVisitPages.Hash,
                                     Url = docVisitPages.Url
                                 };
                                 convertVisits.VisitPages.Add(convertVisitPages);
-                            }
+                        }
                             #endregion
 
                             #region refererPages->visits
                             var filterRefererPages = builderVisitPages.Eq(x => x.UniqueID, docVisit.RefererPageID);
                             var resultRefererPages = await sourceCollectionCon.CollectionPages.Find(filterRefererPages).ToListAsync();
                             foreach (var docRefererPages in resultRefererPages)
-                            {
+            {
                                 var convertRefererPages = new ConvertVisitPage
-                                {
+                {
                                     Hash = docRefererPages.Hash,
                                     Url = docRefererPages.Url
                                 };
