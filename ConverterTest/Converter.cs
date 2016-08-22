@@ -53,8 +53,8 @@ namespace ConverterTest
                         var resultMasks = await sourceCollectionCon.CollectionMasks.Find(filterMasks).ToListAsync();
                         foreach (var docMask in resultMasks)
                         {
-                             convertCrawl.DomainMasks.Add(docMask.Name);
-                            }
+                            convertCrawl.DomainMasks.Add(docMask.Name);
+                        }
                         #endregion
 
                         #region ips->crawls
@@ -123,16 +123,13 @@ namespace ConverterTest
                             else convertVisitor.CrawlID = docCrawl.Id;
                         }
 
-                        if (docVisitor.IsBot == "Nein") convertVisitor.IsBot = false;
-                        if (docVisitor.IsBot == "Ja") convertVisitor.IsBot = true;
-                        if (docVisitor.IsForbidden == "Nein") convertVisitor.IsForbidden = false;
-                        if (docVisitor.IsForbidden == "Ja") convertVisitor.IsForbidden = true;
-                        Char delimiter = ';';
-                        String[] splitUserInfo = docVisitor.UserInfo.Split(delimiter);
+                        convertVisitor.IsBot = docVisitor.IsBot == "Ja";
+                        convertVisitor.IsForbidden = docVisitor.IsForbidden == "Ja";
+                        var splitUserInfo = docVisitor.UserInfo.Split(';');
                         convertVisitor.UserInfo.Platform = splitUserInfo[0];
                         convertVisitor.UserInfo.BrowserType = splitUserInfo[1];
-                        if (splitUserInfo[2] == "True") convertVisitor.UserInfo.IsAuthenticated = true;
-                        if (splitUserInfo[2] == "False") convertVisitor.UserInfo.IsAuthenticated = false;
+                        convertVisitor.UserInfo.IsAuthenticated = splitUserInfo[2] == "True";
+                        convertVisitor.UserInfo.IsAuthenticated = splitUserInfo[2] != "False";
                         convertVisitor.UserInfo.UserName = splitUserInfo[3];
                         convertVisitor.UserInfo.type = splitUserInfo[4];
 
@@ -155,22 +152,22 @@ namespace ConverterTest
                             foreach (var docVisitPages in resultVisitPages)
                             {
                                 var convertVisitPages = new ConvertVisitPage
-                        {
-                                    Hash = docVisitPages.Hash,
+                                {
+                                    Hash = docVisitPages.Hash,//Remove Hash - it is not needed in NoSQL database
                                     Url = docVisitPages.Url
                                 };
                                 convertVisits.VisitPages.Add(convertVisitPages);
-                        }
+                            }
                             #endregion
 
                             #region refererPages->visits
                             var filterRefererPages = builderVisitPages.Eq(x => x.UniqueID, docVisit.RefererPageID);
                             var resultRefererPages = await sourceCollectionCon.CollectionPages.Find(filterRefererPages).ToListAsync();
                             foreach (var docRefererPages in resultRefererPages)
-            {
+                            {
                                 var convertRefererPages = new ConvertVisitPage
-                {
-                                    Hash = docRefererPages.Hash,
+                                {
+                                    Hash = docRefererPages.Hash,//Remove Hash - it is not needed in NoSQL database
                                     Url = docRefererPages.Url
                                 };
                                 convertVisits.RefererPages.Add(convertRefererPages);

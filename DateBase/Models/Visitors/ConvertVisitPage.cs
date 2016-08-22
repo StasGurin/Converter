@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DataBase.Models.Visitors
 {
-    public class ConvertVisitPage
+    public class ConvertVisitPage//Rename to VisitPage
     {
         public string Hash { get; set; }
         public string Url { get; set; }

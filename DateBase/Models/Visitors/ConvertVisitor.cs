@@ -1,12 +1,9 @@
 ﻿using MongoDB.Bson;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DataBase.Models.Visitors
 {
-    public class ConvertVisitor
+    public class ConvertVisitor//Rename to visitor
     {
         public ObjectId Id { get; set; }
         public BsonDateTime VisitDate { get; set; }
