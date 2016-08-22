@@ -11,6 +11,6 @@ namespace DataBase.Models.Crawls
 
         public List<string> DomainMasks;
 
-        public List<ConvertIP> CrawlIP;
+        public List<IP> CrawlIP;
     }
 }

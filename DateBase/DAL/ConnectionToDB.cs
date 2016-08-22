@@ -8,12 +8,12 @@ namespace DataBase.DAL
     {
 
         public IMongoCollection<Crawl> CollectionConvertCrawls { get; set; }
-        public IMongoCollection<ConvertVisitor> CollectionConvertVisitors { get; set; }
+        public IMongoCollection<Visitor> CollectionConvertVisitors { get; set; }
 
         public ConnectionToDB()
         {
             CollectionConvertCrawls = Connection().GetCollection<Crawl>("crawls");
-            CollectionConvertVisitors = Connection().GetCollection<ConvertVisitor>("visitors");
+            CollectionConvertVisitors = Connection().GetCollection<Visitor>("visitors");
         }
         public IMongoDatabase Connection()
         {

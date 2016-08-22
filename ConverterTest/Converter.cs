@@ -5,10 +5,12 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
 using ConverterTest.Models.Crawls;
 using ConverterTest.Models.Visitors;
 using DataBase.DAL;
+using System;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace ConverterTest
 {
@@ -43,7 +45,7 @@ namespace ConverterTest
                         {
                             Id = docCrawl.Id,
                             DomainMasks = new List<string>(),
-                            CrawlIP = new List<ConvertIP>(),
+                            CrawlIP = new List<IP>(),
                             IPListUrl = docCrawl.IPListUrl,
                             Name = docCrawl.Name
                         };
@@ -62,7 +64,7 @@ namespace ConverterTest
                         var resultIPS = await sourceCollectionCon.CollectionIPS.Find(filterIPS).ToListAsync();
                         foreach (var docIPS in resultIPS)
                         {
-                            var convertIPS = new ConvertIP
+                            var convertIPS = new IP
                             {
                                 IPAddress = docIPS.IPAddress,
                                 IPType = docIPS.IPType
@@ -104,13 +106,13 @@ namespace ConverterTest
 
                         //conver visitors
 
-                        var convertVisitor = new ConvertVisitor
+                        var convertVisitor = new Visitor
                         {
                             Id = docVisitor.Id,
                             VisitDate = docVisitor.VisitDate,
                             IPAddress = docVisitor.IPAddress,
                             DNS = docVisitor.DNS,
-                            Visits = new List<ConvertVisit>(),
+                            Visits = new List<Visit>(),
                             UserInfo = new UserInfo()
                         };
 
@@ -131,7 +133,8 @@ namespace ConverterTest
                         convertVisitor.UserInfo.IsAuthenticated = splitUserInfo[2] == "True";
                         convertVisitor.UserInfo.IsAuthenticated = splitUserInfo[2] != "False";
                         convertVisitor.UserInfo.UserName = splitUserInfo[3];
-                        convertVisitor.UserInfo.type = splitUserInfo[4];
+                        if(splitUserInfo[4] == "crawl") convertVisitor.UserInfo.type = UserInfo.Type.crawl;
+                        else convertVisitor.UserInfo.type = UserInfo.Type.user;
 
                         #region visits->visitors
 
@@ -139,22 +142,20 @@ namespace ConverterTest
                         var resultVisits = await sourceCollectionCon.CollectionVisits.Find(filterVisits).ToListAsync();
                         foreach (var docVisit in resultVisits)
                         {
-                            var convertVisits = new ConvertVisit
+                            var convertVisits = new Visit
                             {
                                 VisitDateTime = docVisit.VisitDateTime,
-                                VisitPages = new List<ConvertVisitPage>(),
-                                RefererPages = new List<ConvertVisitPage>()
-                            };
+                                VisitPages = new List<VisitPage>(),
+                             };
 
                             #region visitPages->visits
                             var filterVisitPages = builderVisitPages.Eq(x => x.UniqueID, docVisit.PageID);
                             var resultVisitPages = await sourceCollectionCon.CollectionPages.Find(filterVisitPages).ToListAsync();
                             foreach (var docVisitPages in resultVisitPages)
                             {
-                                var convertVisitPages = new ConvertVisitPage
+                                var convertVisitPages = new VisitPage
                                 {
-                                    Hash = docVisitPages.Hash,//Remove Hash - it is not needed in NoSQL database
-                                    Url = docVisitPages.Url
+                                   Url = docVisitPages.Url
                                 };
                                 convertVisits.VisitPages.Add(convertVisitPages);
                             }
@@ -165,12 +166,7 @@ namespace ConverterTest
                             var resultRefererPages = await sourceCollectionCon.CollectionPages.Find(filterRefererPages).ToListAsync();
                             foreach (var docRefererPages in resultRefererPages)
                             {
-                                var convertRefererPages = new ConvertVisitPage
-                                {
-                                    Hash = docRefererPages.Hash,//Remove Hash - it is not needed in NoSQL database
-                                    Url = docRefererPages.Url
-                                };
-                                convertVisits.RefererPages.Add(convertRefererPages);
+                                convertVisits.RefererPages = docRefererPages.Url;
                             }
                             #endregion
 

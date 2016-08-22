@@ -1,6 +1,6 @@
 ﻿namespace DataBase.Models.Crawls
 {
-    public class ConvertIP
+    public class IP
     {
         public string IPType { get; set; }
         public string IPAddress { get; set; }

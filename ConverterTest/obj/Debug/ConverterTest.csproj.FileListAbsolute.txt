@@ -24,3 +24,30 @@ E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\ConverterTe
 E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\ConverterTest\obj\Debug\ConverterTest.pdb
 E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\ConverterTest\bin\Debug\DataBase.dll
 E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\ConverterTest\bin\Debug\DataBase.pdb
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\csc.exe
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\Microsoft.CodeAnalysis.dll
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\Microsoft.CSharp.Core.targets
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\Microsoft.VisualBasic.Core.targets
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\System.Collections.Immutable.dll
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\System.Reflection.Metadata.dll
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\vbc.exe
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\VBCSCompiler.exe
+C:\projects\Converter\ConverterTest\bin\Debug\roslyn\VBCSCompiler.exe.config
+C:\projects\Converter\ConverterTest\bin\Debug\ConverterTest.dll
+C:\projects\Converter\ConverterTest\bin\Debug\ConverterTest.pdb
+C:\projects\Converter\ConverterTest\bin\Debug\DataBase.dll
+C:\projects\Converter\ConverterTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Bson.dll
+C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.Core.dll
+C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.dll
+C:\projects\Converter\ConverterTest\bin\Debug\DataBase.pdb
+C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Bson.xml
+C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.xml
+C:\projects\Converter\ConverterTest\bin\Debug\ru\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\projects\Converter\ConverterTest\obj\Debug\ConverterTest.csprojResolveAssemblyReference.cache
+C:\projects\Converter\ConverterTest\obj\Debug\ConverterTest.dll
+C:\projects\Converter\ConverterTest\obj\Debug\ConverterTest.pdb
+C:\projects\Converter\ConverterTest\bin\Debug\ConverterTest.dll.config
