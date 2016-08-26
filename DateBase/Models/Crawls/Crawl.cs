@@ -5,12 +5,31 @@ namespace DataBase.Models.Crawls
 {
     public class Crawl
     {
+        #region Properties
+
         public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string IPListUrl { get; set; }
+        public List<string> DomainMasks { get; set; }
+        public List<IP> IPs { get; set; }
 
-        public List<string> DomainMasks;
+        #endregion
 
-        public List<IP> CrawlIP;
+        #region Constructors
+
+        public Crawl()
+        {
+        }
+
+        public Crawl(ObjectId id, string name, string ipListUrl)
+        {
+            Id = id;
+            Name = name;
+            IPListUrl = ipListUrl;
+            DomainMasks = new List<string>();
+            IPs = new List<IP>();
+        }
+
+        #endregion
     }
 }

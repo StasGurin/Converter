@@ -2,7 +2,25 @@
 {
     public class IP
     {
-        public string IPType { get; set; }
-        public string IPAddress { get; set; }
+        #region Properties
+
+        public string Type { get; set; }
+        public string Address { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public IP()
+        {
+        }
+
+        public IP(string type, string address)
+        {
+            Type = type;
+            Address = address;
+        }
+
+        #endregion
     }
 }
