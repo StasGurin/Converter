@@ -25,6 +25,13 @@ namespace DataBase.Models.Visitors
             VisitPages = new List<VisitPage>();
         }
 
+        public Visit(BsonDateTime visitDateTime, string refererPage)
+        {
+            RefererPage = refererPage;
+            VisitDateTime = visitDateTime;
+            VisitPages = new List<VisitPage>();
+        }
+
         #endregion
     }
 }

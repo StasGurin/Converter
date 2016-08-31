@@ -21,7 +21,7 @@ namespace ConverterTest
 
         public CollectionConnect()
         {
-            var connection = new ConnectionToDB();
+            var connection = new DatabaseContext();
             var connectionDB = connection.Connection();
 
             CollectionMasks = connectionDB.GetCollection<SourceDomainMask>("sp_crawls_domain_masks");

@@ -9,7 +9,7 @@ namespace SEO.Models
     {
         #region Properties
 
-        public int projectId { get; set; }
+        public int ProjectId { get; set; }
         public string UserName { get; set; }
         public string IPAddress { get; set; }
         public DateTime VisitDate { get; set; }
@@ -25,8 +25,6 @@ namespace SEO.Models
         public VisitInfo()
         {
         }
-
-        //public VisitInfo(int id, string userName )
         #endregion
 
     }

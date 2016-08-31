@@ -107,7 +107,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\ConnectionToDB.cs" />
+    <Compile Include="DAL\DatabaseContext.cs" />
     <Compile Include="Models\Crawls\Crawl.cs" />
     <Compile Include="Models\Crawls\IP.cs" />
     <Compile Include="Models\Projects\Project.cs" />

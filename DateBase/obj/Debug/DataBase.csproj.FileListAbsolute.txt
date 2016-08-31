@@ -71,4 +71,3 @@ C:\projects\Converter\DateBase\bin\MongoDB.Bson.xml
 C:\projects\Converter\DateBase\bin\MongoDB.Driver.xml
 C:\projects\Converter\DateBase\obj\Debug\DataBase.dll
 C:\projects\Converter\DateBase\obj\Debug\DataBase.pdb
-C:\projects\Converter\DateBase\obj\Debug\DataBase.csprojResolveAssemblyReference.cache

@@ -16,7 +16,7 @@ namespace ConverterTest
     {
         #region Members
 
-        private readonly ConnectionToDB dataBase = new ConnectionToDB();
+        private readonly DatabaseContext dataBase = new DatabaseContext();
         private readonly CollectionConnect sourceCollectionCon = new CollectionConnect();
 
         #endregion
@@ -53,7 +53,7 @@ namespace ConverterTest
                         convertCrawl.IPs.AddRange(resultIPS.Select(docIPS => new IP(docIPS.IPType, docIPS.IPAddress)));
                         #endregion
 
-                        await dataBase.CollectionCrawls.InsertOneAsync(convertCrawl);
+                        await dataBase.Crawls.InsertOneAsync(convertCrawl);
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace ConverterTest
                         }
                         #endregion
 
-                        await dataBase.CollectionVisitors.InsertOneAsync(convertVisitor);
+                        await dataBase.Visitors.InsertOneAsync(convertVisitor);
 
                         count++;
                     }
