@@ -15,7 +15,7 @@ namespace SEO.Models
         public DateTime VisitDate { get; set; }
         public string Platform { get; set; }
         public string BrowserType { get; set; }
-        public bool isAuthenticated { get; set; }
+        public bool IsAuthenticated { get; set; }
         public string Url { get; set; }
         public string Referer { get; set; }
 

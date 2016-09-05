@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using SEO.Models;
-using DataBase.Models.Visitors;
 using DataBase.DAL;
 using SEO.BLL;
 using MongoDB.Driver;
@@ -13,7 +12,8 @@ namespace SEO.Controllers
     {
 
         private readonly DatabaseContext dataBase = new DatabaseContext();
-        ValidUser visit = new ValidUser();
+        VisitorManager visit = new VisitorManager();
+
         // GET: api/ValidVisit
         public IEnumerable<string> Get()
         {
@@ -29,14 +29,13 @@ namespace SEO.Controllers
         // POST: api/ValidVisit
         public async Task Post([FromBody]VisitInfo visitInfo)
         {
-            var builderUser = Builders<Visitor>.Filter;
-            var filterUser = builderUser.Eq(x => x.UserInfo.UserName, visitInfo.UserName) & builderUser.Eq(x => x.IPAddress, visitInfo.IPAddress) & builderUser.Eq(x => x.VisitDate, visitInfo.VisitDate);
-            var resultUser = await dataBase.Visitors.Find(filterUser).FirstOrDefaultAsync();
+            var visitFilter = visit.resultVisitor(visitInfo);
+            var resultUser = await dataBase.Visitors.Find(visitFilter).FirstOrDefaultAsync();
 
             if (resultUser == null)
                 await dataBase.Visitors.InsertOneAsync(visit.CreateUser(visitInfo));
             else
-                await dataBase.Visitors.UpdateOneAsync(filterUser, visit.UpdateUser(visitInfo));
+                await dataBase.Visitors.UpdateOneAsync(visitFilter, visit.UpdateUser(visitInfo));
 
         }
 
