@@ -16,7 +16,7 @@ namespace ConverterTest
     {
         #region Members
 
-        private readonly ConnectionToDB dataBase = new ConnectionToDB();
+        private readonly DatabaseContext dataBase = new DatabaseContext();
         private readonly CollectionConnect sourceCollectionCon = new CollectionConnect();
 
         #endregion
@@ -44,10 +44,7 @@ namespace ConverterTest
                         #region masks->crawls
                         var filterMasks = builderMasks.Eq(x => x.OwnerID, docCrawl.UniqueID);
                         var resultMasks = await sourceCollectionCon.CollectionMasks.Find(filterMasks).ToListAsync();
-                        foreach (var docMask in resultMasks)
-                        {
-                            convertCrawl.DomainMasks.Add(docMask.Name);
-                        }
+                        convertCrawl.DomainMasks.AddRange(resultMasks.Select(docMask => docMask.Name));
                         #endregion
 
                         #region ips->crawls
@@ -56,7 +53,7 @@ namespace ConverterTest
                         convertCrawl.IPs.AddRange(resultIPS.Select(docIPS => new IP(docIPS.IPType, docIPS.IPAddress)));
                         #endregion
 
-                        await dataBase.CollectionConvertCrawls.InsertOneAsync(convertCrawl);
+                        await dataBase.Crawls.InsertOneAsync(convertCrawl);
                     }
                 }
             }
@@ -101,7 +98,6 @@ namespace ConverterTest
                         convertVisitor.UserInfo.Platform = splitUserInfo[0];
                         convertVisitor.UserInfo.BrowserType = splitUserInfo[1];
                         convertVisitor.UserInfo.IsAuthenticated = splitUserInfo[2] == "True";
-                        convertVisitor.UserInfo.IsAuthenticated = splitUserInfo[2] != "False";
                         convertVisitor.UserInfo.UserName = splitUserInfo[3];
                         convertVisitor.UserInfo.type = splitUserInfo[4] == "crawl" ? UserInfo.Type.crawl : UserInfo.Type.user;
 
@@ -130,7 +126,7 @@ namespace ConverterTest
                         }
                         #endregion
 
-                        await dataBase.CollectionConvertVisitors.InsertOneAsync(convertVisitor);
+                        await dataBase.Visitors.InsertOneAsync(convertVisitor);
 
                         count++;
                     }

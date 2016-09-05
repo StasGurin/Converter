@@ -35,6 +35,16 @@ namespace DataBase.Models.Visitors
             UserInfo = new UserInfo();
         }
 
+        public Visitor(ObjectId id, DateTime visitDate, string ipAddress, string dns)
+        {
+            Id = id;
+            VisitDate = visitDate;
+            IPAddress = ipAddress;
+            DNS = dns;
+            Visits = new List<Visit>();
+            UserInfo = new UserInfo();
+        }
+
         #endregion
     }
 }
