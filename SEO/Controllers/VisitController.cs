@@ -14,7 +14,7 @@ namespace SEO.Controllers
         [HttpPost]
         public async Task Post([FromBody]VisitInfo visitInfo)
         {
-            await visit.VisitorManger(visitInfo);
+            await visit.VisitorsManager(visitInfo);
         }
 
         //[Route("{id}")]

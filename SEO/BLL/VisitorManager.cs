@@ -44,7 +44,7 @@ namespace SEO.BLL
             return update;
         }
 
-        public async Task VisitorManger(VisitInfo visitInfo)
+        public async Task VisitorsManager(VisitInfo visitInfo)
         {
             var visitFilter = resultVisitor(visitInfo);
             var resultUser = await dataBase.Visitors.Find(visitFilter).FirstOrDefaultAsync();
