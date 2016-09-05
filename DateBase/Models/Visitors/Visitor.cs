@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataBase.Models.Visitors
 {

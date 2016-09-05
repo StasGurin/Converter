@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SEO.Models
+﻿namespace SEO.Models
 {
     public class ResponsModel
     {
@@ -23,6 +18,14 @@ namespace SEO.Models
         {
         }
 
+        public ResponsModel(string title, string body, string keywords, bool isCrawl, bool isForbidden)
+        {
+            Title = title;
+            Body = body;
+            Keywords = keywords;
+            IsCrawl = isCrawl;
+            IsForbidden = isForbidden;
+        }
         #endregion
     }
 }
