@@ -4,11 +4,13 @@ using DataBase.DAL;
 using System;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Threading.Tasks;
 
 namespace SEO.BLL
 {
     public class VisitorManager
     {
+        private readonly DatabaseContext dataBase = new DatabaseContext();
         public FilterDefinition<Visitor> resultVisitor(VisitInfo visitInfo)
         {
             var builderUser = Builders<Visitor>.Filter;
@@ -42,5 +44,15 @@ namespace SEO.BLL
             return update;
         }
 
+        public async Task VisitorManger(VisitInfo visitInfo)
+        {
+            var visitFilter = resultVisitor(visitInfo);
+            var resultUser = await dataBase.Visitors.Find(visitFilter).FirstOrDefaultAsync();
+
+            if (resultUser == null)
+                await dataBase.Visitors.InsertOneAsync(CreateUser(visitInfo));
+            else
+                await dataBase.Visitors.UpdateOneAsync(visitFilter, UpdateUser(visitInfo));
+        }
     }
 }
