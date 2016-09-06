@@ -12,12 +12,12 @@ namespace SEO.BLL
 
         private readonly DatabaseContext dataBase = new DatabaseContext();
 
-        public async Task<ResponsModel> CrawlsManager(VisitInfo visitInfo)
+        public async Task<CrawlInfo> CrawlsManager(VisitInfo visitInfo)
         {
             var builderCrawl = Builders<Crawl>.Filter;
             var filter = new BsonDocument();
             var findOptions = new FindOptions { NoCursorTimeout = true };
-            var responsModel = new ResponsModel(null, null, null, false, false);
+            var crawlInfo = new CrawlInfo(null, false);
 
             using (var cursorCrawls = await dataBase.Crawls.Find(filter, findOptions).ToCursorAsync())
             {
@@ -30,13 +30,22 @@ namespace SEO.BLL
                         foreach (var docIps in docCrawl.IPs)
                         {
                             if (visitInfo.IPAddress.StartsWith(docIps.Address))
-                                responsModel.IsCrawl = true;
-
+                            {
+                                crawlInfo.IsCrawl = true;
+                                crawlInfo.Id = docCrawl.Id;
+                            }
                         }
                     }
                 }
             }
 
+            return crawlInfo;
+        }
+
+        public async Task<ResponsModel> Respons(VisitInfo visitInfo)
+        {
+            var crawlInfo = await CrawlsManager(visitInfo);
+            var responsModel = new ResponsModel(null, null, null, crawlInfo.IsCrawl, false);
             return responsModel;
         }
     }

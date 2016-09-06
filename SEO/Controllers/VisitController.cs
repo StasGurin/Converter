@@ -16,7 +16,7 @@ namespace SEO.Controllers
         public async Task<ResponsModel> Post([FromBody]VisitInfo visitInfo)
         {
             await visitor.VisitorsManager(visitInfo);
-            return await crawl.CrawlsManager(visitInfo);
+            return await crawl.Respons(visitInfo);
         }
 
         //[Route("{id}")]

@@ -18,19 +18,18 @@ namespace SEO.BLL
             return builderUser.Eq(x => x.UserInfo.UserName, visitInfo.UserName) & builderUser.Eq(x => x.IPAddress, visitInfo.IPAddress) & builderUser.Eq(x => x.VisitDate, visitInfo.VisitDate);
         }
 
-        public Visitor CreateUser(VisitInfo visitInfo, ResponsModel respons)
+        public Visitor CreateUser(VisitInfo visitInfo, CrawlInfo crawlInfo)
         {
 
             var page = new VisitPage(visitInfo.Url);
             var visit = new Visit(DateTime.Now, visitInfo.Referer);
             visit.VisitPages.Add(page);
 
-            ;
             var userInfo = new UserInfo(visitInfo.Platform, visitInfo.BrowserType, visitInfo.IsAuthenticated, visitInfo.UserName)
             {
-                type = respons.IsCrawl == true ? UserInfo.Type.crawl : UserInfo.Type.user
+                type = crawlInfo.IsCrawl == true ? UserInfo.Type.crawl : UserInfo.Type.user
             };
-            var visitor = new Visitor(ObjectId.GenerateNewId(), visitInfo.VisitDate, visitInfo.IPAddress, null)
+            var visitor = new Visitor(ObjectId.GenerateNewId(), visitInfo.VisitDate, visitInfo.IPAddress, crawlInfo.Id, null)
             {
                 UserInfo = userInfo
             };
