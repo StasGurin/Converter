@@ -13,7 +13,7 @@ namespace SEO.Controllers
 
         [Route]
         [HttpPost]
-        public async Task<ResponsModel> Post([FromBody]VisitInfo visitInfo)
+        public async Task<ResponseModel> Post([FromBody]VisitInfo visitInfo)
         {
             await visitor.VisitorsManager(visitInfo);
             return await crawl.Respons(visitInfo);

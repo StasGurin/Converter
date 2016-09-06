@@ -18,7 +18,7 @@ namespace SEO.BLL
             return builderUser.Eq(x => x.UserInfo.UserName, visitInfo.UserName) & builderUser.Eq(x => x.IPAddress, visitInfo.IPAddress) & builderUser.Eq(x => x.VisitDate, visitInfo.VisitDate);
         }
 
-        public Visitor CreateUser(VisitInfo visitInfo, CrawlInfo crawlInfo)
+        public Visitor CreateUser(VisitInfo visitInfo, PageRenderingInfo crawlInfo)
         {
 
             var page = new VisitPage(visitInfo.Url);

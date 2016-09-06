@@ -1,6 +1,6 @@
 ﻿namespace SEO.Models
 {
-    public class ResponsModel
+    public class ResponseModel
     {
         #region Properties
 
@@ -14,11 +14,11 @@
 
         #region Constructors
 
-        public ResponsModel()
+        public ResponseModel()
         {
         }
 
-        public ResponsModel(string title, string body, string keywords, bool isCrawl, bool isForbidden)
+        public ResponseModel(string title, string body, string keywords, bool isCrawl, bool isForbidden)
         {
             Title = title;
             Body = body;

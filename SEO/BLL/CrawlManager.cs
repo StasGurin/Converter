@@ -12,40 +12,30 @@ namespace SEO.BLL
 
         private readonly DatabaseContext dataBase = new DatabaseContext();
 
-        public async Task<CrawlInfo> CrawlsManager(VisitInfo visitInfo)
+        public async Task<PageRenderingInfo> CrawlsManager(VisitInfo visitInfo)
         {
-            var builderCrawl = Builders<Crawl>.Filter;
-            var filter = new BsonDocument();
-            var findOptions = new FindOptions { NoCursorTimeout = true };
-            var crawlInfo = new CrawlInfo(null, false);
+            var crawlInfo = new PageRenderingInfo(null, false);
 
-            using (var cursorCrawls = await dataBase.Crawls.Find(filter, findOptions).ToCursorAsync())
+            var lenght = visitInfo.IPAddress.LastIndexOf('.');
+            var startIndex = 0;
+
+            var buildCrawl = Builders<Crawl>.Filter;
+            var filterIPs = buildCrawl.ElemMatch(x => x.IPs, x => x.Address == visitInfo.IPAddress.Substring(startIndex, lenght));
+            var resultCrawl = await dataBase.Crawls.Find(filterIPs).FirstOrDefaultAsync();
+
+            if (resultCrawl != null)
             {
-                while (await cursorCrawls.MoveNextAsync())
-                {
-                    var dateCrawls = cursorCrawls.Current;
-
-                    foreach (var docCrawl in dateCrawls)
-                    {
-                        foreach (var docIps in docCrawl.IPs)
-                        {
-                            if (visitInfo.IPAddress.StartsWith(docIps.Address))
-                            {
-                                crawlInfo.IsCrawl = true;
-                                crawlInfo.Id = docCrawl.Id;
-                            }
-                        }
-                    }
-                }
+                crawlInfo.IsCrawl = true;
+                crawlInfo.Id = resultCrawl.Id;
             }
 
             return crawlInfo;
         }
 
-        public async Task<ResponsModel> Respons(VisitInfo visitInfo)
+        public async Task<ResponseModel> Respons(VisitInfo visitInfo)
         {
             var crawlInfo = await CrawlsManager(visitInfo);
-            var responsModel = new ResponsModel(null, null, null, crawlInfo.IsCrawl, false);
+            var responsModel = new ResponseModel(null, null, null, crawlInfo.IsCrawl, false);
             return responsModel;
         }
     }

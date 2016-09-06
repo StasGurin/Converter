@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SEO.Models
 {
-    public class CrawlInfo
+    public class PageRenderingInfo
     {
         #region Properties
 
@@ -17,11 +17,11 @@ namespace SEO.Models
 
         #region Constructors
 
-        public CrawlInfo()
+        public PageRenderingInfo()
         {
         }
 
-        public CrawlInfo(ObjectId? id, bool isCrawl)
+        public PageRenderingInfo(ObjectId? id, bool isCrawl)
         {
             Id = id;
             IsCrawl = isCrawl;
