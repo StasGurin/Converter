@@ -28,6 +28,16 @@ namespace SEO.BLL
                 crawlInfo.IsCrawl = true;
                 crawlInfo.Id = resultCrawl.Id;
             }
+            else
+            {
+                filterIPs = buildCrawl.ElemMatch(x => x.IPs, x => x.Address == visitInfo.IPAddress);
+                resultCrawl = await dataBase.Crawls.Find(filterIPs).FirstOrDefaultAsync();
+                if (resultCrawl != null)
+                {
+                    crawlInfo.IsCrawl = true;
+                    crawlInfo.Id = resultCrawl.Id;
+                }
+            }
 
             return crawlInfo;
         }
