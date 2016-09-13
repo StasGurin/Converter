@@ -9,14 +9,15 @@ namespace SEO.Controllers
     public class VisitController : ApiController
     {
         VisitorManager visitor = new VisitorManager();
-        CrawlManager crawl = new CrawlManager();
+
 
         [Route]
         [HttpPost]
         public async Task<ResponseModel> Post([FromBody]VisitInfo visitInfo)
         {
-            await visitor.VisitorsManager(visitInfo);
-            return await crawl.Respons(visitInfo);
+            var respons = CrawlManager.RecognitionCrawl(visitInfo);
+            await visitor.VisitorsManager(visitInfo, respons);
+            return CrawlManager.InitResponse(respons);
         }
 
         //[Route("{id}")]

@@ -11,7 +11,7 @@ namespace SEO.BLL
     public class VisitorManager
     {
         private readonly DatabaseContext dataBase = new DatabaseContext();
-        CrawlManager crawl = new CrawlManager();
+
         public FilterDefinition<Visitor> resultVisitor(VisitInfo visitInfo)
         {
             var builderUser = Builders<Visitor>.Filter;
@@ -45,11 +45,10 @@ namespace SEO.BLL
             return update;
         }
 
-        public async Task VisitorsManager(VisitInfo visitInfo)
+        public async Task VisitorsManager(VisitInfo visitInfo, PageRenderingInfo respons)
         {
             var visitFilter = resultVisitor(visitInfo);
             var resultUser = await dataBase.Visitors.Find(visitFilter).FirstOrDefaultAsync();
-            var respons = await crawl.CrawlsManager(visitInfo);
             if (resultUser == null)
                 await dataBase.Visitors.InsertOneAsync(CreateUser(visitInfo, respons));
             else

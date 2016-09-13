@@ -3,50 +3,46 @@ using DataBase.Models.Crawls;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using SEO.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SEO.BLL
 {
-    public class CrawlManager
+    public static class CrawlManager
     {
 
-        private readonly DatabaseContext dataBase = new DatabaseContext();
+        private static readonly DatabaseContext dataBase = new DatabaseContext();
 
-        public async Task<PageRenderingInfo> CrawlsManager(VisitInfo visitInfo)
+        public static List<Crawl> Crawls = new List<Crawl>();
+        static CrawlManager()
         {
-            var crawlInfo = new PageRenderingInfo(null, false);
+            var filter = new BsonDocument();
+            var result = dataBase.Crawls.Find(filter).ToListAsync().Result;
 
-            var lenght = visitInfo.IPAddress.LastIndexOf('.');
-            var startIndex = 0;
-
-            var buildCrawl = Builders<Crawl>.Filter;
-            var filterIPs = buildCrawl.ElemMatch(x => x.IPs, x => x.Address == visitInfo.IPAddress.Substring(startIndex, lenght));
-            var resultCrawl = await dataBase.Crawls.Find(filterIPs).FirstOrDefaultAsync();
-
-            if (resultCrawl != null)
-            {
-                crawlInfo.IsCrawl = true;
-                crawlInfo.Id = resultCrawl.Id;
-            }
-            else
-            {
-                filterIPs = buildCrawl.ElemMatch(x => x.IPs, x => x.Address == visitInfo.IPAddress);
-                resultCrawl = await dataBase.Crawls.Find(filterIPs).FirstOrDefaultAsync();
-                if (resultCrawl != null)
-                {
-                    crawlInfo.IsCrawl = true;
-                    crawlInfo.Id = resultCrawl.Id;
-                }
-            }
-
-            return crawlInfo;
+            Crawls.AddRange(result.Select(crawls => new Crawl(crawls.Id, crawls.Name, crawls.IPListUrl, crawls.DomainMasks, crawls.IPs)));
         }
 
-        public async Task<ResponseModel> Respons(VisitInfo visitInfo)
+        public static PageRenderingInfo RecognitionCrawl(VisitInfo visitInfo)
         {
-            var crawlInfo = await CrawlsManager(visitInfo);
-            var responsModel = new ResponseModel(null, null, null, crawlInfo.IsCrawl, false);
-            return responsModel;
+
+            foreach (var docCrawls in Crawls)
+            {
+                foreach (var docIPs in docCrawls.IPs)
+                {
+                    if (docIPs.Address.StartsWith(visitInfo.IPAddress))
+                    {
+                        return new PageRenderingInfo(docCrawls.Id, true);
+                    }
+                }
+            }
+            return new PageRenderingInfo(null, false);
+        }
+
+        public static ResponseModel InitResponse(PageRenderingInfo respons)
+        {
+            return new ResponseModel(null, null, null, respons.IsCrawl, false);
         }
     }
 }
