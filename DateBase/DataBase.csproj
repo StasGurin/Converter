@@ -110,6 +110,7 @@
     <Compile Include="DAL\DatabaseContext.cs" />
     <Compile Include="Models\Crawls\Crawl.cs" />
     <Compile Include="Models\Crawls\IP.cs" />
+    <Compile Include="Models\Projects\PageInfo.cs" />
     <Compile Include="Models\Projects\Project.cs" />
     <Compile Include="Models\Visitors\Visit.cs" />
     <Compile Include="Models\Visitors\Visitor.cs" />

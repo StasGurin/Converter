@@ -36,7 +36,7 @@ namespace DataBase.Models.Visitors
             UserInfo = new UserInfo();
         }
 
-        public Visitor(ObjectId id, DateTime visitDate, string ipAddress, ObjectId? crawlID, string dns)
+        public Visitor(ObjectId id, DateTime visitDate, string ipAddress, ObjectId? crawlID, string dns, UserInfo userInfo)
         {
             Id = id;
             VisitDate = visitDate;
@@ -44,7 +44,7 @@ namespace DataBase.Models.Visitors
             CrawlID = crawlID;
             DNS = dns;
             Visits = new List<Visit>();
-            UserInfo = new UserInfo();
+            UserInfo = userInfo;
         }
 
         #endregion

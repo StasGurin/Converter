@@ -1,8 +1,5 @@
 ﻿using MongoDB.Bson;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DataBase.Models.Projects
 {
@@ -10,9 +7,7 @@ namespace DataBase.Models.Projects
     {
 
         #region Properties
-        public ObjectId _id { get; set; }
-        public int UniqueID { get; set; }
-        public int OwnerID { get; set; }
+        public ObjectId Id { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
         public string DomainName { get; set; }
@@ -25,12 +20,38 @@ namespace DataBase.Models.Projects
         public string FtpStartupFolder { get; set; }
         public string RobotsTXT { get; set; }
         public string SiteMapXML { get; set; }
-        public string AdminsNames { get; set; }
-        public string HostingIsPayed { get; set; }
+        public List<string> AdminsNames { get; set; }
+        public bool HostingIsPayed { get; set; }
+        public List<PageInfo> Pages { get; set; }
+
         #endregion
 
+        #region Constructors
         public Project()
         {
         }
+
+        public Project(ObjectId id, string type, string name, string domainName, string keyword, string semanticEngine, string databaseName,
+        string ftpLogin, string ftpServer, string ftpPassword, string ftpStartupFolder, string robotsTXT, string siteMapXML)
+        {
+            Id = id;
+            Type = type;
+            Name = name;
+            DomainName = domainName;
+            Keyword = keyword;
+            SemanticEngine = semanticEngine;
+            DatabaseName = databaseName;
+            FtpLogin = ftpLogin;
+            FtpServer = ftpServer;
+            FtpPassword = ftpPassword;
+            FtpStartupFolder = ftpStartupFolder;
+            RobotsTXT = robotsTXT;
+            SiteMapXML = siteMapXML;
+            AdminsNames = new List<string>();
+            Pages = new List<PageInfo>();
+        }
+
+        #endregion
+
     }
 }

@@ -8,6 +8,8 @@ using ConverterTest.Models.Crawls;
 using ConverterTest.Models.Visitors;
 using DataBase.DAL;
 using System.Linq;
+using ConverterTest.Models.Projects;
+using DataBase.Models.Projects;
 
 namespace ConverterTest
 {
@@ -31,7 +33,7 @@ namespace ConverterTest
             var builderIP = Builders<SourceIP>.Filter;
             var builderMasks = Builders<SourceDomainMask>.Filter;
 
-            using (var cursorCrawls = await sourceCollectionCon.CollectionCrawls.Find(filter, findOptions).ToCursorAsync())
+            using (var cursorCrawls = await sourceCollectionCon.SourceCrawls.Find(filter, findOptions).ToCursorAsync())
             {
                 while (await cursorCrawls.MoveNextAsync())
                 {
@@ -43,13 +45,13 @@ namespace ConverterTest
 
                         #region masks->crawls
                         var filterMasks = builderMasks.Eq(x => x.OwnerID, docCrawl.UniqueID);
-                        var resultMasks = await sourceCollectionCon.CollectionMasks.Find(filterMasks).ToListAsync();
+                        var resultMasks = await sourceCollectionCon.SourceMasks.Find(filterMasks).ToListAsync();
                         convertCrawl.DomainMasks.AddRange(resultMasks.Select(docMask => docMask.Name));
                         #endregion
 
                         #region ips->crawls
                         var filterIPS = builderIP.Eq(x => x.OwnerID, docCrawl.UniqueID);
-                        var resultIPS = await sourceCollectionCon.CollectionIPS.Find(filterIPS).ToListAsync();
+                        var resultIPS = await sourceCollectionCon.SourceIPS.Find(filterIPS).ToListAsync();
                         convertCrawl.IPs.AddRange(resultIPS.Select(docIPS => new IP(docIPS.IPType, docIPS.IPAddress)));
                         #endregion
 
@@ -73,7 +75,7 @@ namespace ConverterTest
             var builderVisits = Builders<SourceVisit>.Filter;
             var builderVisitPages = Builders<SourceVisitPage>.Filter;
 
-            using (var cursorVisitors = await sourceCollectionCon.CollectionVisitors.Find(filter, findOptions).ToCursorAsync())
+            using (var cursorVisitors = await sourceCollectionCon.SourceVisitors.Find(filter, findOptions).ToCursorAsync())
             {
                 while (await cursorVisitors.MoveNextAsync())
                 {
@@ -88,7 +90,7 @@ namespace ConverterTest
                         var convertVisitor = new Visitor(docVisitor.VisitDate.ToLocalTime(), docVisitor.IPAddress, docVisitor.DNS);
 
                         var filterCrawl = builderCrawl.Eq(x => x.UniqueID, docVisitor.CrawlID);
-                        var resultCrawl = await sourceCollectionCon.CollectionCrawls.Find(filterCrawl).FirstOrDefaultAsync();
+                        var resultCrawl = await sourceCollectionCon.SourceCrawls.Find(filterCrawl).FirstOrDefaultAsync();
                         if (resultCrawl != null)
                             convertVisitor.CrawlID = resultCrawl.Id;
 
@@ -104,20 +106,20 @@ namespace ConverterTest
                         #region visits->visitors
 
                         var filterVisits = builderVisits.Eq(x => x.OwnerID, docVisitor.UniqueID);
-                        var resultVisits = await sourceCollectionCon.CollectionVisits.Find(filterVisits).ToListAsync();
+                        var resultVisits = await sourceCollectionCon.SourceVisits.Find(filterVisits).ToListAsync();
                         foreach (var docVisit in resultVisits)
                         {
                             var convertVisits = new Visit(docVisit.VisitDateTime);
 
                             #region visitPages->visits
                             var filterVisitPages = builderVisitPages.Eq(x => x.UniqueID, docVisit.PageID);
-                            var resultVisitPages = await sourceCollectionCon.CollectionPages.Find(filterVisitPages).ToListAsync();
+                            var resultVisitPages = await sourceCollectionCon.SourcePages.Find(filterVisitPages).ToListAsync();
                             convertVisits.VisitPages.AddRange(resultVisitPages.Select(p => new VisitPage(p.Url)));
                             #endregion
 
                             #region refererPages->visits
                             var filterRefererPage = builderVisitPages.Eq(x => x.UniqueID, docVisit.RefererPageID);
-                            var resultRefererPage = await sourceCollectionCon.CollectionPages.Find(filterRefererPage).FirstOrDefaultAsync();
+                            var resultRefererPage = await sourceCollectionCon.SourcePages.Find(filterRefererPage).FirstOrDefaultAsync();
                             if (resultRefererPage != null)
                                 convertVisits.RefererPage = resultRefererPage.Url;
                             #endregion
@@ -129,6 +131,36 @@ namespace ConverterTest
                         await dataBase.Visitors.InsertOneAsync(convertVisitor);
 
                         count++;
+                    }
+                }
+            }
+            #endregion
+        }
+
+        [TestMethod]
+        public async Task ConvertProjects()
+        {
+            var filter = new BsonDocument();
+            var findOptions = new FindOptions { NoCursorTimeout = true };
+
+            #region projects
+            var builderProjects = Builders<SourceProject>.Filter;
+
+            using (var cursorProjects = await sourceCollectionCon.SourceProjects.Find(filter, findOptions).ToCursorAsync())
+            {
+                while (await cursorProjects.MoveNextAsync())
+                {
+                    var dateProjects = cursorProjects.Current;
+
+                    foreach (var docProjects in dateProjects)
+                    {
+                        var convertProject = new Project(docProjects.Id, docProjects.Type, docProjects.Name, docProjects.DomainName, docProjects.Keyword,
+                            docProjects.SemanticEngine, docProjects.DatabaseName, docProjects.FtpLogin, docProjects.FtpServer, docProjects.FtpPassword,
+                            docProjects.FtpStartupFolder, docProjects.RobotsTXT, docProjects.SiteMapXML);
+                        var splitAdmins = docProjects.AdminsNames.Split(',');
+                        convertProject.AdminsNames.AddRange(splitAdmins.Select(docAdmins => docAdmins.Trim('\'')));
+                        convertProject.HostingIsPayed = docProjects.HostingIsPayed == "Ja";
+                        await dataBase.Projects.InsertOneAsync(convertProject);
                     }
                 }
             }
