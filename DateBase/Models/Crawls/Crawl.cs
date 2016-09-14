@@ -30,6 +30,15 @@ namespace DataBase.Models.Crawls
             IPs = new List<IP>();
         }
 
+        public Crawl(ObjectId id, string name, string ipListUrl, List<string> domainMasks, List<IP> ips)
+        {
+            Id = id;
+            Name = name;
+            IPListUrl = ipListUrl;
+            DomainMasks = domainMasks;
+            IPs = ips;
+        }
+
         #endregion
     }
 }

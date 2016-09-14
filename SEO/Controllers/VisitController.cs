@@ -8,13 +8,16 @@ namespace SEO.Controllers
     [RoutePrefix("api/visit")]
     public class VisitController : ApiController
     {
-        VisitorManager visit = new VisitorManager();
+        VisitorManager visitor = new VisitorManager();
+
 
         [Route]
         [HttpPost]
-        public async Task Post([FromBody]VisitInfo visitInfo)
+        public async Task<ResponseModel> Post([FromBody]VisitInfo visitInfo)
         {
-            await visit.VisitorManger(visitInfo);
+            var respons = CrawlManager.RecognitionCrawl(visitInfo);
+            await visitor.VisitorsManager(visitInfo, respons);
+            return CrawlManager.InitResponse(respons);
         }
 
         //[Route("{id}")]

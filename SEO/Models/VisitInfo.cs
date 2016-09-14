@@ -22,9 +22,11 @@ namespace SEO.Models
         #endregion
 
         #region Constructors
+
         public VisitInfo()
         {
         }
+
         #endregion
 
     }

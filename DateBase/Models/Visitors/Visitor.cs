@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataBase.Models.Visitors
 {
@@ -35,11 +36,12 @@ namespace DataBase.Models.Visitors
             UserInfo = new UserInfo();
         }
 
-        public Visitor(ObjectId id, DateTime visitDate, string ipAddress, string dns)
+        public Visitor(ObjectId id, DateTime visitDate, string ipAddress, ObjectId? crawlID, string dns)
         {
             Id = id;
             VisitDate = visitDate;
             IPAddress = ipAddress;
+            CrawlID = crawlID;
             DNS = dns;
             Visits = new List<Visit>();
             UserInfo = new UserInfo();
