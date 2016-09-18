@@ -15,6 +15,9 @@ namespace ConverterTest
         public IMongoCollection<SourceVisit> SourceVisits { get; set; }
         public IMongoCollection<SourceVisitor> SourceVisitors { get; set; }
         public IMongoCollection<SourceProject> SourceProjects { get; set; }
+        public IMongoCollection<SourceSite> SourceSites { get; set; }
+        public IMongoCollection<SourceSiteMapPage> SourceSiteMapPages { get; set; }
+
 
         public CollectionConnect()
         {
@@ -28,6 +31,8 @@ namespace ConverterTest
             SourceVisits = connectionDB.GetCollection<SourceVisit>("sp_visits");
             SourceVisitors = connectionDB.GetCollection<SourceVisitor>("sp_visitors");
             SourceProjects = connectionDB.GetCollection<SourceProject>("sp_projects");
+            SourceSites = connectionDB.GetCollection<SourceSite>("sp_sites");
+            SourceSiteMapPages = connectionDB.GetCollection<SourceSiteMapPage>("sp_site_map_pages");
         }
     }
 }

@@ -145,6 +145,8 @@ namespace ConverterTest
 
             #region projects
             var builderProjects = Builders<SourceProject>.Filter;
+            var builderSites = Builders<SourceSite>.Filter;
+            var builderSiteMapPages = Builders<SourceSiteMapPage>.Filter;
 
             using (var cursorProjects = await sourceCollectionCon.SourceProjects.Find(filter, findOptions).ToCursorAsync())
             {
@@ -154,12 +156,20 @@ namespace ConverterTest
 
                     foreach (var docProjects in dateProjects)
                     {
-                        var convertProject = new Project(docProjects.Id, docProjects.Type, docProjects.Name, docProjects.DomainName, docProjects.Keyword,
+                        var convertProject = new Project(docProjects.Id, docProjects.Type, docProjects.Name, docProjects.DomainName.Substring(7), docProjects.Keyword,
                             docProjects.SemanticEngine, docProjects.DatabaseName, docProjects.FtpLogin, docProjects.FtpServer, docProjects.FtpPassword,
                             docProjects.FtpStartupFolder, docProjects.RobotsTXT, docProjects.SiteMapXML);
                         var splitAdmins = docProjects.AdminsNames.Split(',');
                         convertProject.AdminsNames.AddRange(splitAdmins.Select(docAdmins => docAdmins.Trim('\'')));
                         convertProject.HostingIsPayed = docProjects.HostingIsPayed == "Ja";
+                        var filterSites = builderSites.Eq(x => x.Name, docProjects.DomainName.Substring(7));
+                        var resultSite = await sourceCollectionCon.SourceSites.Find(filterSites).FirstOrDefaultAsync();
+                        if (resultSite != null)
+                        {
+                            var filterSiteMapPages = builderSiteMapPages.Eq(x => x.OwnerID, resultSite.UniqueID);
+                            var resultSiteMapPages = await sourceCollectionCon.SourceSiteMapPages.Find(filterSiteMapPages).ToListAsync();
+                            convertProject.Pages.AddRange(resultSiteMapPages.Select(docPages => new PageInfo(docPages.Name, docPages.Type, docPages.Title, docPages.CloakedText, docPages.META_Keywords)));
+                        }
                         await dataBase.Projects.InsertOneAsync(convertProject);
                     }
                 }
