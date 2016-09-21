@@ -156,13 +156,13 @@ namespace ConverterTest
 
                     foreach (var docProjects in dateProjects)
                     {
-                        var convertProject = new Project(docProjects.Id, docProjects.Type, docProjects.Name, docProjects.DomainName.Substring(7), docProjects.Keyword,
-                            docProjects.SemanticEngine, docProjects.DatabaseName, docProjects.FtpLogin, docProjects.FtpServer, docProjects.FtpPassword,
-                            docProjects.FtpStartupFolder, docProjects.RobotsTXT, docProjects.SiteMapXML);
+                        var convertProject = new Project(docProjects.Id, docProjects.Type, docProjects.Name, docProjects.DomainName.Replace("http://",""),
+                            docProjects.Keyword, docProjects.SemanticEngine, docProjects.DatabaseName, docProjects.FtpLogin,
+                            docProjects.FtpServer, docProjects.FtpPassword, docProjects.FtpStartupFolder, docProjects.RobotsTXT, docProjects.SiteMapXML);
                         var splitAdmins = docProjects.AdminsNames.Split(',');
                         convertProject.AdminsNames.AddRange(splitAdmins.Select(docAdmins => docAdmins.Trim('\'')));
                         convertProject.HostingIsPayed = docProjects.HostingIsPayed == "Ja";
-                        var filterSites = builderSites.Eq(x => x.Name, docProjects.DomainName.Substring(7));
+                        var filterSites = builderSites.Eq(x => x.Name, docProjects.DomainName.Replace("http://", ""));
                         var resultSite = await sourceCollectionCon.SourceSites.Find(filterSites).FirstOrDefaultAsync();
                         if (resultSite != null)
                         {
