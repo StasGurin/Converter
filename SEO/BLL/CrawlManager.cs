@@ -27,9 +27,9 @@ namespace SEO.BLL
 
             foreach (var crawl in Crawls)
             {
-                foreach (var docIPs in crawl.IPs)
+                foreach (var IPs in crawl.IPs)
                 {
-                    if (visitInfo.IPAddress.StartsWith(docIPs.Address))
+                    if (visitInfo.IPAddress.StartsWith(IPs.Address))
                     {
                         return new PageRenderingInfo(crawl.Id, true);
                     }

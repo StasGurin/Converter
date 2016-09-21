@@ -29,10 +29,8 @@ namespace SEO.BLL
             {
                 type = crawlInfo.IsCrawl == true ? UserInfo.Type.crawl : UserInfo.Type.user
             };
-            var visitor = new Visitor(ObjectId.GenerateNewId(), visitInfo.VisitDate, visitInfo.IPAddress, crawlInfo.Id, null)
-            {
-                UserInfo = userInfo
-            };
+            var visitor = new Visitor(ObjectId.GenerateNewId(), visitInfo.VisitDate, visitInfo.IPAddress, crawlInfo.Id, null, userInfo);
+
             visitor.Visits.Add(visit);
             return visitor;
         }

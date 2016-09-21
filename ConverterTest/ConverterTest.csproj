@@ -69,6 +69,9 @@
     <Compile Include="Models\Crawls\SourceCrawl.cs" />
     <Compile Include="Models\Crawls\SourceDomainMask.cs" />
     <Compile Include="Models\Crawls\SourceIP.cs" />
+    <Compile Include="Models\Projects\SourceSiteMapPage.cs" />
+    <Compile Include="Models\Projects\SourceProject.cs" />
+    <Compile Include="Models\Projects\SourceSite.cs" />
     <Compile Include="Models\Visitors\SourceVisit.cs" />
     <Compile Include="Models\Visitors\SourceVisitor.cs" />
     <Compile Include="Models\Visitors\SourceVisitPage.cs" />

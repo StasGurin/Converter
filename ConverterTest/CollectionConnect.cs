@@ -1,35 +1,38 @@
 ﻿using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ConverterTest.Models.Visitors;
 using ConverterTest.Models.Crawls;
 using DataBase.DAL;
+using ConverterTest.Models.Projects;
 
 namespace ConverterTest
 {
     class CollectionConnect
     {
-        public IMongoCollection<SourceDomainMask> CollectionMasks { get; set; }
-        public IMongoCollection<SourceCrawl> CollectionCrawls { get; set; }
-        public IMongoCollection<SourceIP> CollectionIPS { get; set; }
-        public IMongoCollection<SourceVisitPage> CollectionPages { get; set; }
-        public IMongoCollection<SourceVisit> CollectionVisits { get; set; }
-        public IMongoCollection<SourceVisitor> CollectionVisitors { get; set; }
+        public IMongoCollection<SourceDomainMask> SourceMasks { get; set; }
+        public IMongoCollection<SourceCrawl> SourceCrawls { get; set; }
+        public IMongoCollection<SourceIP> SourceIPS { get; set; }
+        public IMongoCollection<SourceVisitPage> SourcePages { get; set; }
+        public IMongoCollection<SourceVisit> SourceVisits { get; set; }
+        public IMongoCollection<SourceVisitor> SourceVisitors { get; set; }
+        public IMongoCollection<SourceProject> SourceProjects { get; set; }
+        public IMongoCollection<SourceSite> SourceSites { get; set; }
+        public IMongoCollection<SourceSiteMapPage> SourceSiteMapPages { get; set; }
+
 
         public CollectionConnect()
         {
             var connection = new DatabaseContext();
             var connectionDB = connection.Connection();
 
-            CollectionMasks = connectionDB.GetCollection<SourceDomainMask>("sp_crawls_domain_masks");
-            CollectionCrawls = connectionDB.GetCollection<SourceCrawl>("sp_crawls");
-            CollectionIPS = connectionDB.GetCollection<SourceIP>("sp_crawls_ips");
-            CollectionPages = connectionDB.GetCollection<SourceVisitPage>("sp_visit_pages");
-            CollectionVisits = connectionDB.GetCollection<SourceVisit>("sp_visits");
-            CollectionVisitors = connectionDB.GetCollection<SourceVisitor>("sp_visitors");
+            SourceMasks = connectionDB.GetCollection<SourceDomainMask>("sp_crawls_domain_masks");
+            SourceCrawls = connectionDB.GetCollection<SourceCrawl>("sp_crawls");
+            SourceIPS = connectionDB.GetCollection<SourceIP>("sp_crawls_ips");
+            SourcePages = connectionDB.GetCollection<SourceVisitPage>("sp_visit_pages");
+            SourceVisits = connectionDB.GetCollection<SourceVisit>("sp_visits");
+            SourceVisitors = connectionDB.GetCollection<SourceVisitor>("sp_visitors");
+            SourceProjects = connectionDB.GetCollection<SourceProject>("sp_projects");
+            SourceSites = connectionDB.GetCollection<SourceSite>("sp_sites");
+            SourceSiteMapPages = connectionDB.GetCollection<SourceSiteMapPage>("sp_site_map_pages");
         }
     }
 }
