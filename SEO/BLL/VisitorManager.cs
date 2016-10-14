@@ -18,7 +18,7 @@ namespace SEO.BLL
             return builderUser.Eq(x => x.UserInfo.UserName, visitInfo.UserName) & builderUser.Eq(x => x.IPAddress, visitInfo.IPAddress) & builderUser.Eq(x => x.VisitDate, visitInfo.VisitDate);
         }
 
-        public Visitor CreateUser(VisitInfo visitInfo, PageRenderingInfo crawlInfo)
+        public Visitor CreateVisit(VisitInfo visitInfo, PageRenderingInfo crawlInfo)
         {
 
             var page = new VisitPage(visitInfo.Url);
@@ -35,10 +35,11 @@ namespace SEO.BLL
             return visitor;
         }
 
-        public UpdateDefinition<Visitor> UpdateUser(VisitInfo visitInfo)
+        public UpdateDefinition<Visitor> UpdateVisit(VisitInfo visitInfo)
         {
             var page = new VisitPage(visitInfo.Url);
             var visit = new Visit(DateTime.Now, visitInfo.Referer);
+            visit.VisitPages.Add(page);
             var update = Builders<Visitor>.Update.Push(x => x.Visits, visit);
             return update;
         }
@@ -48,9 +49,9 @@ namespace SEO.BLL
             var visitFilter = resultVisitor(visitInfo);
             var resultUser = await dataBase.Visitors.Find(visitFilter).FirstOrDefaultAsync();
             if (resultUser == null)
-                await dataBase.Visitors.InsertOneAsync(CreateUser(visitInfo, respons));
+                await dataBase.Visitors.InsertOneAsync(CreateVisit(visitInfo, respons));
             else
-                await dataBase.Visitors.UpdateOneAsync(visitFilter, UpdateUser(visitInfo));
+                await dataBase.Visitors.UpdateOneAsync(visitFilter, UpdateVisit(visitInfo));
         }
     }
 }

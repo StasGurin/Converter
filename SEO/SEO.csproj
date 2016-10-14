@@ -129,6 +129,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\CrawlManager.cs" />
+    <Compile Include="BLL\PageManager.cs" />
     <Compile Include="BLL\VisitorManager.cs" />
     <Compile Include="Controllers\VisitController.cs" />
     <Compile Include="Global.asax.cs">

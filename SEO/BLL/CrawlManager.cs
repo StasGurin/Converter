@@ -4,7 +4,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using SEO.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SEO.BLL
 {
@@ -31,16 +30,17 @@ namespace SEO.BLL
                 {
                     if (visitInfo.IPAddress.StartsWith(IPs.Address))
                     {
-                        return new PageRenderingInfo(crawl.Id, true);
+                        var seoPageInfo = PageManager.ResponsePage(visitInfo.Url);
+                        return new PageRenderingInfo(crawl.Id, true, seoPageInfo.Title, seoPageInfo.Body, seoPageInfo.Keywords);
                     }
                 }
             }
-            return new PageRenderingInfo(null, false);
+            return new PageRenderingInfo(null, false, null, null, null);
         }
 
         public static ResponseModel InitResponse(PageRenderingInfo respons)
         {
-            return new ResponseModel(null, null, null, respons.IsCrawl, false);
+            return new ResponseModel(respons.Title, respons.Body, respons.Keywords, respons.IsCrawl, false);
         }
     }
 }
