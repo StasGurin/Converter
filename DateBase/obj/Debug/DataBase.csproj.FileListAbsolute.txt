@@ -1,0 +1,74 @@
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\csc.exe
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\System.Collections.Immutable.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\System.Reflection.Metadata.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\vbc.exe
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\VBCSCompiler.exe
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\roslyn\VBCSCompiler.exe.config
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.Agent.Intercept.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.DependencyCollector.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.Web.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.WindowsServer.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.ApplicationInsights.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\MongoDB.Bson.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\MongoDB.Driver.Core.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\MongoDB.Driver.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.DependencyCollector.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.Web.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.AI.WindowsServer.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.ApplicationInsights.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\MongoDB.Bson.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\MongoDB.Driver.xml
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\DataBase.dll.config
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\DataBase.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\bin\DataBase.pdb
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\obj\Debug\DataBase.csprojResolveAssemblyReference.cache
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\obj\Debug\DataBase.dll
+E:\SkyDrive\Документы\Visual Studio 2015\Projects\Converter\DateBase\obj\Debug\DataBase.pdb
+C:\projects\Converter\DateBase\bin\roslyn\csc.exe
+C:\projects\Converter\DateBase\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\projects\Converter\DateBase\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\projects\Converter\DateBase\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\projects\Converter\DateBase\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\projects\Converter\DateBase\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\projects\Converter\DateBase\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\projects\Converter\DateBase\bin\roslyn\System.Collections.Immutable.dll
+C:\projects\Converter\DateBase\bin\roslyn\System.Reflection.Metadata.dll
+C:\projects\Converter\DateBase\bin\roslyn\vbc.exe
+C:\projects\Converter\DateBase\bin\roslyn\VBCSCompiler.exe
+C:\projects\Converter\DateBase\bin\roslyn\VBCSCompiler.exe.config
+C:\projects\Converter\DateBase\bin\DataBase.dll.config
+C:\projects\Converter\DateBase\bin\DataBase.dll
+C:\projects\Converter\DateBase\bin\DataBase.pdb
+C:\projects\Converter\DateBase\bin\Microsoft.AI.Agent.Intercept.dll
+C:\projects\Converter\DateBase\bin\Microsoft.AI.DependencyCollector.dll
+C:\projects\Converter\DateBase\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\projects\Converter\DateBase\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\projects\Converter\DateBase\bin\Microsoft.AI.Web.dll
+C:\projects\Converter\DateBase\bin\Microsoft.AI.WindowsServer.dll
+C:\projects\Converter\DateBase\bin\Microsoft.ApplicationInsights.dll
+C:\projects\Converter\DateBase\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\projects\Converter\DateBase\bin\MongoDB.Bson.dll
+C:\projects\Converter\DateBase\bin\MongoDB.Driver.Core.dll
+C:\projects\Converter\DateBase\bin\MongoDB.Driver.dll
+C:\projects\Converter\DateBase\bin\Microsoft.AI.DependencyCollector.xml
+C:\projects\Converter\DateBase\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\projects\Converter\DateBase\bin\Microsoft.AI.Web.xml
+C:\projects\Converter\DateBase\bin\Microsoft.AI.WindowsServer.xml
+C:\projects\Converter\DateBase\bin\Microsoft.ApplicationInsights.xml
+C:\projects\Converter\DateBase\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\projects\Converter\DateBase\bin\MongoDB.Bson.xml
+C:\projects\Converter\DateBase\bin\MongoDB.Driver.xml
+C:\projects\Converter\DateBase\obj\Debug\DataBase.dll
+C:\projects\Converter\DateBase\obj\Debug\DataBase.pdb
+C:\projects\Converter\DateBase\obj\Debug\DataBase.csprojResolveAssemblyReference.cache
