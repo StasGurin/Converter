@@ -41,7 +41,6 @@ namespace SEO.Models
             Body = body;
             Keywords = keywords;
         }
-
         #endregion
     }
 }
