@@ -26,7 +26,6 @@
             IsCrawl = isCrawl;
             IsForbidden = isForbidden;
         }
-
         #endregion
     }
 }

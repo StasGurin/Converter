@@ -4,8 +4,6 @@ namespace ConverterTest.Models.Visitors
 {
     public class SourceVisitor
     {
-        #region Properties
-
         public ObjectId Id { get; set; }
         public int UniqueID { get; set; }
         public int OwnerID { get; set; }
@@ -17,7 +15,5 @@ namespace ConverterTest.Models.Visitors
         public string UserName { get; set; }
         public string IsBot { get; set; }
         public string IsForbidden { get; set; }
-
-        #endregion
     }
 }

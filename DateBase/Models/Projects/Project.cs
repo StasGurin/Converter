@@ -7,7 +7,6 @@ namespace DataBase.Models.Projects
     {
 
         #region Properties
-
         public ObjectId Id { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
