@@ -28,11 +28,5 @@ namespace ConverterTest.Models.Projects
 
         #endregion
 
-        #region Constructors
-        public SourceSiteMapPage()
-        {
-        }
-
-        #endregion
     }
 }

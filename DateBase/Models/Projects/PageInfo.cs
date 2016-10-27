@@ -3,6 +3,7 @@
     public class PageInfo
     {
         #region Properties
+
         public string Url { get; set; }
         public string Type { get; set; }
         public string Title { get; set; }
@@ -12,6 +13,7 @@
         #endregion
 
         #region Constructors
+
         public PageInfo()
         {
         }
