@@ -39,7 +39,7 @@ namespace SEO.BLL
             var result = await GetVisitirsByDate(date);
             var visitorList = new List<VisitorDashboard>();
             visitorList.AddRange(result.Select(docVisitor => new VisitorDashboard(null, null, docVisitor.UserInfo.UserName, docVisitor.IPAddress, docVisitor.DNS,
-                docVisitor.Visits.Count, docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime(), docVisitor.Visits.Last().VisitDateTime.ToLocalTime().Subtract(docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime()),
+                docVisitor.Visits.Count, docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime(), (docVisitor.Visits.Last().VisitDateTime.ToLocalTime().Subtract(docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime())).TotalMinutes,
                 docVisitor.Visits.FirstOrDefault().RefererPage, docVisitor.UserInfo.BrowserType, docVisitor.UserInfo.Platform)));
             return visitorList;
         }

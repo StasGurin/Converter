@@ -27,7 +27,7 @@ namespace SEO.Models
 
         }
         public VisitorDashboard(string country, string city, string userName, string ip, string dns, int pages, DateTime time,
-            TimeSpan duration, string refererPage, string browserType, string platform)
+            double duration, string refererPage, string browserType, string platform)
         {
             Country = country;
             City = city;
@@ -36,7 +36,7 @@ namespace SEO.Models
             DNS = dns;
             Pages = pages;
             Time = time.ToShortTimeString();
-            Duration = duration.ToString(@"\:mm\:ss");
+            Duration = String.Format("{0}:{1:0}", (int)duration, (duration - (int)duration) * 60);
             RefererPage = refererPage;
             BrowserType = browserType;
             Platform = platform;
