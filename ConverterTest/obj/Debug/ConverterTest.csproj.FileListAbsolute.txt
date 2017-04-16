@@ -47,8 +47,8 @@ C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.dll
 C:\projects\Converter\ConverterTest\bin\Debug\DataBase.pdb
 C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Bson.xml
 C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.xml
+C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.Core.xml
 C:\projects\Converter\ConverterTest\bin\Debug\ru\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
 C:\projects\Converter\ConverterTest\obj\Debug\ConverterTest.csprojResolveAssemblyReference.cache
 C:\projects\Converter\ConverterTest\obj\Debug\ConverterTest.dll
 C:\projects\Converter\ConverterTest\obj\Debug\ConverterTest.pdb
-C:\projects\Converter\ConverterTest\bin\Debug\MongoDB.Driver.Core.xml

@@ -9,6 +9,7 @@ namespace SEO.Models
     {
         #region Properties
 
+        public string Date { get; set; }
         public int UsersNumber { get; set; }
         public int CrawlsNumber { get; set; }
         public int AdminsNumber { get; set; }
@@ -24,8 +25,9 @@ namespace SEO.Models
 
         } 
 
-        public VisitStatistic(int usersNumber, int crawlsNumber, int adminsNumber, int botsNumber, int forbiddenNumber)
+        public VisitStatistic(string date, int usersNumber, int crawlsNumber, int adminsNumber, int botsNumber, int forbiddenNumber)
         {
+            Date = date;
             UsersNumber = usersNumber;
             CrawlsNumber = crawlsNumber;
             AdminsNumber = adminsNumber;

@@ -5,10 +5,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
+using System.Web.Http.Cors;
+
 namespace SEO.Controllers
 {
 
     [RoutePrefix("api/dashboard")]
+    [EnableCors("http://localhost:4200", // Origin
+            "*",                     // Request headers
+            "*",                    // HTTP methods
+            "*",                    // Response headers
+            SupportsCredentials = true  // Allow credentials
+        )]
     public class DashboardController : ApiController
     {
         #region Members
@@ -20,17 +28,17 @@ namespace SEO.Controllers
 
         [Route]
         [HttpPost]
-        public async Task<Dictionary<string, VisitStatistic>> DateStatPost(DateTime startDate, DateTime finishDate)
+        public async Task<List<VisitStatistic>> DateStatPost([FromBody]DateStatModel dateStatModel )
         {
-            return await manager.VisitStatCount(startDate, finishDate);
+            return await manager.VisitStatCount(dateStatModel.StartDate, dateStatModel.FinishDate, dateStatModel.DomainName);
 
         }
 
         [Route]
         [HttpPost]
-        public async Task<List<VisitorDashboard>> VisitorsPost(DateTime date)
+        public async Task<List<VisitorDashboard>> VisitorsPost(DateTime date, string domainName, string status)
         {
-            return await manager.VisitorsList(date);
+            return await manager.VisitorsList(date, domainName, status);
         }
 
         [Route]

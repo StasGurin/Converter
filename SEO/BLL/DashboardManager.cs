@@ -13,33 +13,48 @@ namespace SEO.BLL
     {
         #region Members
 
-        private Dictionary<string, VisitStatistic> datesAndCountDictionary = new Dictionary<string, VisitStatistic>();
+        private List<VisitStatistic> datesAndCountDictionary = new List<VisitStatistic>();
         private readonly DatabaseContext dataBase = new DatabaseContext();
 
         #endregion
 
-        public async Task<Dictionary<string, VisitStatistic>> VisitStatCount(DateTime startDate, DateTime finishDate)
+        public async Task<List<VisitStatistic>> VisitStatCount(DateTime startDate, DateTime finishDate, string domainName)
         {
-            for (DateTime date = startDate; date <= finishDate; date = date.AddDays(1))
+            ////get visitors by date & dom name
+            var builderUser = Builders<Visitor>.Filter;
+            var filter = builderUser.Gte(x => x.VisitDate, startDate.ToUniversalTime()) & builderUser.Lte(x => x.VisitDate, finishDate.ToUniversalTime());
+            var result = await dataBase.Visitors.Find(filter).ToListAsync();
+            var resultByDomainName = from visit in result where visit.Visits.FirstOrDefault().VisitPages.FirstOrDefault().Url.Contains(domainName) == true select visit;
+            var adminsNames = from k in PageManager.Projects where k.DomainName == domainName select k.AdminsNames;
+            for (DateTime date = startDate.ToUniversalTime(); date <= finishDate.ToUniversalTime(); date = date.AddDays(1))
             {
-                var result = await GetVisitirsByDate(date);
-                int usersLinq = result.Count();
-                int crawlsLinq = (from visitor in result where visitor.UserInfo.type == UserInfo.Type.crawl select visitor).Count();
-                int adminsLinq = 0;
-                int botsLinq = (from visitor in result where visitor.IsBot == true select visitor).Count();
-                int forbiddenLinq = (from visitor in result where visitor.IsForbidden == true select visitor).Count();
-                var count = new VisitStatistic(usersLinq, crawlsLinq, adminsLinq, botsLinq, forbiddenLinq);
-                if (usersLinq != 0 || crawlsLinq != 0 || botsLinq != 0 || forbiddenLinq != 0 || adminsLinq != 0) datesAndCountDictionary.Add(date.ToShortDateString(), count);
+                int usersNumber = (from visitor in resultByDomainName where visitor.UserInfo.type == UserInfo.Type.user && visitor.VisitDate == date select visitor).Count();
+                int crawlsNumber = (from visitor in resultByDomainName where visitor.UserInfo.type == UserInfo.Type.crawl && visitor.VisitDate == date select visitor).Count();
+
+                int adminsNumber = 0;
+                foreach (var visit in resultByDomainName)
+                {
+                    foreach (var admin in adminsNames.FirstOrDefault())
+                    {
+                        if ((visit.UserInfo.UserName == admin) && (visit.VisitDate.ToUniversalTime() == date)) adminsNumber++;
+                    }
+                }
+
+                int botsNumber = (from visitor in resultByDomainName where visitor.IsBot == true && visitor.VisitDate == date select visitor).Count();
+                int forbiddenNumber = (from visitor in resultByDomainName where visitor.IsForbidden == true && visitor.VisitDate == date select visitor).Count();
+                var count = new VisitStatistic(date.ToLocalTime().ToShortDateString(), usersNumber, crawlsNumber, adminsNumber, botsNumber, forbiddenNumber);
+                if (usersNumber != 0 || crawlsNumber != 0 || botsNumber != 0 || forbiddenNumber != 0 || adminsNumber != 0) datesAndCountDictionary.Add(count);
             }
+
             return datesAndCountDictionary;
         }
 
-        public async Task<List<VisitorDashboard>> VisitorsList(DateTime date)
+        public async Task<List<VisitorDashboard>> VisitorsList(DateTime date, string domainName, string status)
         {
-            var result = await GetVisitirsByDate(date);
+            var result = await GetVisitorsByDate(date, domainName, status);
             var visitorList = new List<VisitorDashboard>();
             visitorList.AddRange(result.Select(docVisitor => new VisitorDashboard(null, null, docVisitor.UserInfo.UserName, docVisitor.IPAddress, docVisitor.DNS,
-                docVisitor.Visits.Count, docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime(), (docVisitor.Visits.Last().VisitDateTime.ToLocalTime().Subtract(docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime())).TotalMinutes,
+                docVisitor.Visits.Count, docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime(), (docVisitor.Visits.LastOrDefault().VisitDateTime.ToLocalTime().Subtract(docVisitor.Visits.FirstOrDefault().VisitDateTime.ToLocalTime())).TotalMinutes,
                 docVisitor.Visits.FirstOrDefault().RefererPage, docVisitor.UserInfo.BrowserType, docVisitor.UserInfo.Platform)));
             return visitorList;
         }
@@ -56,11 +71,59 @@ namespace SEO.BLL
         }
 
 
-        public async Task<List<Visitor>> GetVisitirsByDate(DateTime date)
+        public async Task<List<Visitor>> GetVisitorsByDate(DateTime date, string domainName, string status)
         {
+            List<Visitor> visitorsList = new List<Visitor>();
             var builderUser = Builders<Visitor>.Filter;
             var filter = builderUser.Eq(x => x.VisitDate, date);
-            return await dataBase.Visitors.Find(filter).ToListAsync();
+            var result = await dataBase.Visitors.Find(filter).ToListAsync();
+            switch (status)
+            {
+                case "user":
+                    {
+                        visitorsList = (from visit in result where visit.Visits.FirstOrDefault().VisitPages.FirstOrDefault().Url.Contains(domainName) == true &&
+                                        visit.UserInfo.type == UserInfo.Type.user select visit).ToList();
+                        break;
+                    }
+                case "crawl":
+                    {
+                        visitorsList = (from visit in result where visit.Visits.FirstOrDefault().VisitPages.FirstOrDefault().Url.Contains(domainName) == true &&
+                                        visit.UserInfo.type == UserInfo.Type.crawl select visit).ToList();
+                        break;
+                    }
+                case "admin":
+                    {
+                        var adminsNames = from admin in PageManager.Projects where admin.DomainName == domainName select admin.AdminsNames;
+                        var resultByDomainName = from visit in result where visit.Visits.FirstOrDefault().VisitPages.FirstOrDefault().Url.Contains(domainName) == true select visit;
+                        foreach (var visit in resultByDomainName)
+                        {
+                            foreach (var admin in adminsNames.FirstOrDefault())
+                            {
+                                if ((visit.UserInfo.UserName == admin))
+                                {
+                                    visitorsList.Add(visit);
+                                }
+                            }
+                        }
+
+                        break;
+                    }
+                case "bot":
+                    {
+                        visitorsList = (from visit in result where visit.Visits.FirstOrDefault().VisitPages.FirstOrDefault().Url.Contains(domainName) == true &&
+                                        visit.IsBot == true select visit).ToList();
+                        break;
+                    }
+                case "forbidden":
+                    {
+                        visitorsList = (from visit in result where visit.Visits.FirstOrDefault().VisitPages.FirstOrDefault().Url.Contains(domainName) == true &&
+                                        visit.IsForbidden == true select visit).ToList();
+                        break;
+                    }
+                default: break;
+            }
+
+            return visitorsList;
         }
     }
 }
