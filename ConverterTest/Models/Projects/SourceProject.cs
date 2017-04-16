@@ -23,14 +23,7 @@ namespace ConverterTest.Models.Projects
         public string SiteMapXML { get; set; }
         public string AdminsNames { get; set; }
         public string HostingIsPayed { get; set; }
-        #endregion
-
-        #region Constructors
-        public SourceProject()
-        {
-        }
 
         #endregion
-
     }
 }

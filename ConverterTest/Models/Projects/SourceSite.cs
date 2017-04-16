@@ -16,12 +16,5 @@ namespace ConverterTest.Models.Projects
         public string DescriptionConstantPart { get; set; }
 
         #endregion
-
-        #region Constructors
-        public SourceSite()
-        {
-        }
-
-        #endregion
     }
 }

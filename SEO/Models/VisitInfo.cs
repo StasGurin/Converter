@@ -17,14 +17,5 @@ namespace SEO.Models
         public string Referer { get; set; }
 
         #endregion
-
-        #region Constructors
-
-        public VisitInfo()
-        {
-        }
-
-        #endregion
-
     }
 }
